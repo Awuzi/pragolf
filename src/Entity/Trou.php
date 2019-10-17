@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -66,12 +67,12 @@ class Trou
         return $this;
     }
 
-    public function getTempsRef(): ?\DateTimeInterface
+    public function getTempsRef(): ?DateTimeInterface
     {
         return $this->tempsRef;
     }
 
-    public function setTempsRef(\DateTimeInterface $tempsRef): self
+    public function setTempsRef(DateTimeInterface $tempsRef): self
     {
         $this->tempsRef = $tempsRef;
 
