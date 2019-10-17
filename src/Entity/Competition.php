@@ -44,6 +44,16 @@ class Competition
      */
     private $partie;
 
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $cadence;
+
+    /**
+     * @ORM\Column(type="blob")
+     */
+    private $fichier;
+
     public function __construct()
     {
         $this->partie = new ArrayCollection();
@@ -129,6 +139,30 @@ class Competition
                 $partie->setCompetition(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCadence(): ?\DateTimeInterface
+    {
+        return $this->cadence;
+    }
+
+    public function setCadence(\DateTimeInterface $cadence): self
+    {
+        $this->cadence = $cadence;
+
+        return $this;
+    }
+
+    public function getFichier()
+    {
+        return $this->fichier;
+    }
+
+    public function setFichier($fichier): self
+    {
+        $this->fichier = $fichier;
 
         return $this;
     }
