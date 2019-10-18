@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Services\MyReadFilter;
+use App\Services\ExcelExtract;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,11 +14,11 @@ class IndexController extends AbstractController
      */
     public function index()
     {
-        $tableauJoueurs = MyReadFilter::uploadExcelFile();
+        $fichierJoueurs = ExcelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx');
+        $tableauJoueurs = ExcelExtract::phpToJson($fichierJoueurs);
 
         return $this->render('index/index.html.twig', [
-            'joueur' => $tableauJoueurs,
-            'controller_name' => 'IndexController',
+            'joueurs' => $tableauJoueurs,
         ]);
     }
 }
