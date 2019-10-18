@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -76,24 +77,24 @@ class Competition
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(DateTimeInterface $date): self
     {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getHeureDepart(): ?\DateTimeInterface
+    public function getHeureDepart(): ?DateTimeInterface
     {
         return $this->heureDepart;
     }
 
-    public function setHeureDepart(\DateTimeInterface $heureDepart): self
+    public function setHeureDepart(DateTimeInterface $heureDepart): self
     {
         $this->heureDepart = $heureDepart;
 
@@ -143,12 +144,12 @@ class Competition
         return $this;
     }
 
-    public function getCadence(): ?\DateTimeInterface
+    public function getCadence(): ?DateTimeInterface
     {
         return $this->cadence;
     }
 
-    public function setCadence(\DateTimeInterface $cadence): self
+    public function setCadence(DateTimeInterface $cadence): self
     {
         $this->cadence = $cadence;
 

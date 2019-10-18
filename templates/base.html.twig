@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-{#        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{ asset('/assets/css/material-kit.css') }}">
-        <link rel="stylesheet" href="{{ asset('/assets/demo/demo.css') }}">#}
+        {#        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+                <link rel="stylesheet" href="{{ asset('/assets/css/material-kit.css') }}">
+                <link rel="stylesheet" href="{{ asset('/assets/demo/demo.css') }}">#}
 
     {% endblock %}
 </head>
@@ -53,41 +53,41 @@
     <div class="section section-basic">
         <div class="container">
             <div class="centered">#}
-                {% block body %}
+{% block body %}
 
-                {% endblock %}
+{% endblock %}
 {#            </div>
         </div>
     </div>
 </div>#}
 
 
-        {% block javascripts %}
-{#            <script src="{{ asset('/assets/js/material-kit.js') }}"></script>
-            <script src="{{ asset('/assets/js/material-kit.js') }}"></script>
-            <script src="{{ asset('/assets/js/core/jquery.min.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('/assets/js/core/popper.min.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('/assets/js/core/bootstrap-material-design.min.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('/assets/js/plugins/moment.min.js') }}"></script>
-            <script src="{{ asset('/assets/js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
-            <script>
-                $(document).ready(function () {
-                    //init DateTimePickers
-                    materialKit.initFormExtendedDatetimepickers();
+{% block javascripts %}
+    {#            <script src="{{ asset('/assets/js/material-kit.js') }}"></script>
+                <script src="{{ asset('/assets/js/material-kit.js') }}"></script>
+                <script src="{{ asset('/assets/js/core/jquery.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('/assets/js/core/popper.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('/assets/js/core/bootstrap-material-design.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('/assets/js/plugins/moment.min.js') }}"></script>
+                <script src="{{ asset('/assets/js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
+                <script>
+                    $(document).ready(function () {
+                        //init DateTimePickers
+                        materialKit.initFormExtendedDatetimepickers();
 
-                    // Sliders Init
-                    materialKit.initSliders();
-                });
+                        // Sliders Init
+                        materialKit.initSliders();
+                    });
 
 
-                function scrollToDownload() {
-                    if ($('.section-download').length != 0) {
-                        $("html, body").animate({
-                            scrollTop: $('.section-download').offset().top
-                        }, 1000);
+                    function scrollToDownload() {
+                        if ($('.section-download').length != 0) {
+                            $("html, body").animate({
+                                scrollTop: $('.section-download').offset().top
+                            }, 1000);
+                        }
                     }
-                }
-            </script>#}
-        {% endblock %}
+                </script>#}
+{% endblock %}
 </body>
 </html>
