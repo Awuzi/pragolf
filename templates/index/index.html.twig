@@ -1,35 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %} Accueil {% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 90%;
-            width: 95%;
-            font: 18px/1.5 sans-serif;
-        }
-
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
-    </style>
-
-    <div class="example-wrapper">
-
-    <h1>Bienvenu sur Pragol, l'application qui va revolutionner vos compèt de Golf</h1>
-    <p>
-
-        {{ joueurs[40] }}, le {{ joueurs[41] }} - <u>{{ joueurs[42] }} inscrits.</u>
-
-        {{ dump(joueurs) }}
-        {#{% for i in range(0, joueurs|length-1) %}
-            {% for j in range(0, 2) %}
-                 {{ j }}{{ joueurs[i][1][j] }}
-            {% endfor %}
-        {% endfor %}
-#}
-    </p>
+    <div class="container-fluid" style="text-align: center;">
+        <div class="centered">
+            <span>
+            By <a href="https://gitlab.com/Wazatus" class="btn btn-outline-info" target="_blank">Stanislas Raczynski</a> & <a href="https://gitlab.com/Awuzi" class="btn btn-outline-info" target="_blank">Yahia Lamri</a>
+            </span>
+        </div>
+    </div>
 {% endblock %}

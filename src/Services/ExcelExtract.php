@@ -5,6 +5,7 @@ namespace App\Services;
 
 use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ExcelExtract implements IReadFilter
@@ -22,7 +23,7 @@ class ExcelExtract implements IReadFilter
         $nomCompet = $workSheet->getCell('B10')->getValue(); // Récupère le nom de la compétition
         $nbJoueurs = $workSheet->getCell('B166')->getValue(); // Récupèe le nombre de joueurs
         $dateCompet = $workSheet->getCell('E63')->getValue(); // Récupère la date de la compétition
-
+        $infoCompet = [$nomCompet, $nbJoueurs, $dateCompet];
         for ($i = 1; $i < 175; $i++) {
             $nom = $workSheet->getCell('B'.$i)->getValue();
             $couleur = $workSheet->getCell('I'.$i)->getValue();
@@ -58,7 +59,7 @@ class ExcelExtract implements IReadFilter
                 }
             }
         }
-        array_push($parties, $nomCompet, $dateCompet, $nbJoueurs);
+        array_push($parties, $infoCompet);
 
         return self::phpToJson($parties);
     }
@@ -66,10 +67,14 @@ class ExcelExtract implements IReadFilter
 
     public static function phpToJson($file)
     {
+
+        $f = new Filesystem();
+        $nouveauChemin = "../public/assets/doc/partie.json";
+        $f->touch($nouveauChemin); //creation du fichier partie.json
         //creation du fichier json et ecriture des infos
         $filename = '../public/assets/doc/partie.json';
-        $f = new File($filename);
-        $f->openFile('w+')->fwrite(json_encode($file, JSON_UNESCAPED_UNICODE));
+        $fo = new File($filename);
+        $fo->openFile('w+')->fwrite(json_encode($file, JSON_UNESCAPED_UNICODE));
         //recuperation du fichier pour extraction en tableau php
         $file = file_get_contents('../public/assets/doc/partie.json');
         $jsonfile = json_decode($file);

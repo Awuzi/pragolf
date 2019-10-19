@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid" style="font-size: 11px">
+        {{ joueurs[40][0] }} , le {{ joueurs[40][2] }} - {{ joueurs[40][1] }} inscrits
+        <table class="table">
+            <tr>
+                <th class="thead">
+                    n°
+                </th>
+                <th class="thead">
+                    Départ
+                </th>
+                <th class="thead">
+                    Joueurs
+                </th>
+                <th class="thead">
+                    Couleur
+                </th>
+                {% for j in range(1,18) %}
+                    <th class="thead">
+                        {{ j }}
+                    </th>
+                {% endfor %}
+            </tr>
+            {% for partie in joueurs %}
+                <tr>
+                    <td>
+                        #
+                    </td>
+                    <td>
+                        {{ h }}:{{ m }}
+                    </td>
+
+                    <td>
+                        {% for joueur in partie[1] %}
+                            {{ joueur }}<br>
+                        {% endfor %}
+                    </td>
+
+                    <td>
+                        {{ partie[0] }}
+                    </td>
+                    {% set min = m %}
+                    {% set heur = h %}
+                    {% for i in range(0, 17) %}
+                        {% set min = trous[i] + min %}
+                        {% if (min > 59) %}
+                            {% set heur = heur + 1 %}
+                            {% set min = min - 60 %}
+                            {% if (min < 10) %}
+                                {% set min = '0' ~ min %}
+                            {% endif %}
+                        {% endif %}
+                        <td>
+                            {{ heur }}:{{ min }}
+                        </td>
+                    {% endfor %}
+
+                </tr>
+                {% set m = m + 11 %}
+                {% if (m > 59) %}
+                    {% set h = h + 1 %}
+                    {% set m = m - 60 %}
+                    {% if (m < 10) %}
+                        {% set m = '0' ~ m %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <br>
+        </table>
+
+        <a href="{{ path('_profiler_phpinfo') }}" class="btn btn-outline-info"> VALIDER </a>
+        <a href="{{ path('remove') }}" class="btn btn-outline-danger"> ANNULER </a>
+    </div>
+
+{% endblock %}

@@ -30,7 +30,7 @@ class UploadController extends AbstractController
             $file->move($this->getParameter('upload_directory'), $filename);
             $competition->setFichier($filename);
 
-            return $this->redirectToRoute("index");
+            return $this->redirectToRoute("view");
         }
 
         return $this->render('upload/upload.html.twig', array('form' => $form->createView()));
