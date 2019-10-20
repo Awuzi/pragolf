@@ -36,7 +36,7 @@ Projet réalisé sous la Licence MIT
 ### **DOCUMENTATION**
 
 Diagramme des classes : 
-![](analyse/DiagClass.png "Diagramme des classes")
+![](analyse/ClassDiag.png "Diagramme des classes")
 
 Diagramme de cas d'utilisation : 
 ![](analyse/UCDiag.png "Diagramme de cas d'utilisation")
