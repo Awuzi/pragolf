@@ -35,13 +35,10 @@ Projet réalisé sous la Licence MIT
 
 ### **DOCUMENTATION**
 
-Diagramme de classe : 
-https://puu.sh/EuMcH/b062a9193c.png
+Diagramme des classes : 
+![](analyse/DiagClass.png "Diagramme des classes")
 
 Diagramme de cas d'utilisation : 
-https://puu.sh/EuMdr/0b7f6ebc27.png
+![](analyse/UCDiag.png "Diagramme de cas d'utilisation")
 
-### **BUG REPORT**
-
-JSP SI FAUT METTRE QQCH OU PAS
 
