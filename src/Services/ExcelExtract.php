@@ -22,8 +22,8 @@ class ExcelExtract implements IReadFilter
 
         $nomCompet = $workSheet->getCell('B10')->getValue(); // Récupère le nom de la compétition
         $nbJoueurs = $workSheet->getCell('B166')->getValue(); // Récupèe le nombre de joueurs
-        $dateCompet = $workSheet->getCell('E63')->getValue(); // Récupère la date de la compétition
-        $infoCompet = [$nomCompet, $nbJoueurs, $dateCompet];
+        $dateCompetition = $workSheet->getCell('E63')->getValue(); // Récupère la date de la compétition
+        $infoCompetition = [$nomCompet, $nbJoueurs, $dateCompetition];
         for ($i = 1; $i < 175; $i++) {
             $nom = $workSheet->getCell('B'.$i)->getValue();
             $couleur = $workSheet->getCell('I'.$i)->getValue();
@@ -34,32 +34,31 @@ class ExcelExtract implements IReadFilter
 
         foreach ($joueurs as $couleur => $joueur) { // Tri de joueurs; créations des parties
 
-            $nbJoueursCouleur = count($joueur);
-            $addJoueurs = false;
-            unset($joueurToAdd);
+            $joueursRestant = count($joueur);
+            unset($joueursGroup3);
 
             foreach ($joueur as $nom) {
-                $joueurToAdd[] = $nom;
 
-                if (($nbJoueursCouleur == 4 or $nbJoueursCouleur == 2) && (count($joueurToAdd) == 2)) {
+                $joueursGroup3[] = $nom;
 
-                    $parties[] = array($couleur, $joueurToAdd);
-                    $nbJoueursCouleur = $nbJoueursCouleur - 2;
-                    unset($joueurToAdd);
-                } elseif ($nbJoueursCouleur == 3 && (count($joueurToAdd) == 3)) {
+                if (($joueursRestant == 4 or $joueursRestant == 2) && (count($joueursGroup3) == 2)) {
+                    $parties[] = array($couleur, $joueursGroup3);
+                    $joueursRestant = $joueursRestant - 2;
+                    unset($joueursGroup3);
 
-                    $parties[] = array($couleur, $joueurToAdd);
-                    $nbJoueursCouleur = $nbJoueursCouleur - 3;
-                    unset($joueurToAdd);
-                } elseif ($nbJoueursCouleur > 4 && (count($joueurToAdd) > 2)) {
+                } elseif ($joueursRestant == 3 && (count($joueursGroup3) == 3)) {
+                    $parties[] = array($couleur, $joueursGroup3);
+                    $joueursRestant = $joueursRestant - 3;
+                    unset($joueursGroup3);
 
-                    $parties[] = array($couleur, $joueurToAdd);
-                    $nbJoueursCouleur = $nbJoueursCouleur - 3;
-                    unset($joueurToAdd);
+                } elseif ($joueursRestant > 4 && (count($joueursGroup3) > 2)) {
+                    $parties[] = array($couleur, $joueursGroup3);
+                    $joueursRestant = $joueursRestant - 3;
+                    unset($joueursGroup3);
                 }
             }
         }
-        array_push($parties, $infoCompet);
+        array_push($parties, $infoCompetition);
 
         return self::phpToJson($parties);
     }
@@ -68,13 +67,13 @@ class ExcelExtract implements IReadFilter
     public static function phpToJson($file)
     {
 
-        $f = new Filesystem();
-        $nouveauChemin = "../public/assets/doc/partie.json";
-        $f->touch($nouveauChemin); //creation du fichier partie.json
+        $newFile = new Filesystem();
+        $path = "../public/assets/doc/partie.json";
+        $newFile->touch($path); //creation du fichier partie.json
         //creation du fichier json et ecriture des infos
         $filename = '../public/assets/doc/partie.json';
-        $fo = new File($filename);
-        $fo->openFile('w+')->fwrite(json_encode($file, JSON_UNESCAPED_UNICODE));
+        $newJsonFile = new File($filename);
+        $newJsonFile->openFile('w+')->fwrite(json_encode($file, JSON_UNESCAPED_UNICODE));
         //recuperation du fichier pour extraction en tableau php
         $file = file_get_contents('../public/assets/doc/partie.json');
         $jsonfile = json_decode($file);
@@ -84,7 +83,7 @@ class ExcelExtract implements IReadFilter
 
     public function readCell($column, $row, $worksheetName = '')
     {
-        // Read title row and rows 20 - 30
+        // Read title row and rows 9 - 175
         return ($row > 9 && $row < 175) ? true : false;
     }
 }
