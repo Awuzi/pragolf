@@ -33,7 +33,6 @@ class ExcelExtract implements IReadFilter
         }
 
         foreach ($joueurs as $couleur => $joueur) { // Tri de joueurs; créations des parties
-
             $joueursRestant = count($joueur);
             unset($joueursGroup3);
 
@@ -43,22 +42,23 @@ class ExcelExtract implements IReadFilter
 
                 if (($joueursRestant == 4 or $joueursRestant == 2) && (count($joueursGroup3) == 2)) {
                     $parties[] = array($couleur, $joueursGroup3);
-                    $joueursRestant = $joueursRestant - 2;
+                    $joueursRestant -= 2;
                     unset($joueursGroup3);
 
                 } elseif ($joueursRestant == 3 && (count($joueursGroup3) == 3)) {
                     $parties[] = array($couleur, $joueursGroup3);
-                    $joueursRestant = $joueursRestant - 3;
+                    $joueursRestant -= 3;
                     unset($joueursGroup3);
 
                 } elseif ($joueursRestant > 4 && (count($joueursGroup3) > 2)) {
                     $parties[] = array($couleur, $joueursGroup3);
-                    $joueursRestant = $joueursRestant - 3;
+                    $joueursRestant -= 3;
                     unset($joueursGroup3);
                 }
             }
         }
         array_push($parties, $infoCompetition);
+
 
         return self::phpToJson($parties);
     }
