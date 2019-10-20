@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,23 +20,24 @@ class Competition
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string")
      */
     private $date;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="integer")
      */
     private $heureDepart;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $minuteDepart;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Golf", inversedBy="competition")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $golf;
 
@@ -47,7 +47,7 @@ class Competition
     private $partie;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="integer")
      */
     private $cadence;
 
@@ -76,48 +76,50 @@ class Competition
         return $this->id;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
 
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getDate(): ?DateTimeInterface
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(DateTimeInterface $date): self
+    public function setDate(string $date): self
     {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getHeureDepart(): ?DateTimeInterface
+    public function getHeureDepart(): ?int
     {
         return $this->heureDepart;
     }
 
-    public function setHeureDepart(DateTimeInterface $heureDepart): self
+    public function setHeureDepart(int $heureDepart): self
     {
         $this->heureDepart = $heureDepart;
 
         return $this;
     }
 
+    public function getMinuteDepart(): ?int
+    {
+        return $this->minuteDepart;
+    }
+
+    public function setMinuteDepart(int $minuteDepart): self
+    {
+        $this->minuteDepart = $minuteDepart;
+
+        return $this;
+    }
+
+
     public function getGolf(): ?Golf
     {
         return $this->golf;
     }
 
-    public function setGolf(?Golf $golf): self
+    public function gol(?Golf $golf): self
     {
         $this->golf = $golf;
 
@@ -155,12 +157,12 @@ class Competition
         return $this;
     }
 
-    public function getCadence(): ?DateTimeInterface
+    public function getCadence(): ?int
     {
         return $this->cadence;
     }
 
-    public function setCadence(DateTimeInterface $cadence): self
+    public function setCadence(int $cadence): self
     {
         $this->cadence = $cadence;
 

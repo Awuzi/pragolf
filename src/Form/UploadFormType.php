@@ -6,6 +6,7 @@ use App\Entity\Competition;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,12 +19,13 @@ class UploadFormType extends AbstractType
     {
         $builder
             //TODO ajouter les champs nomCompetition, dateCompetition, et les champs pour les temps de chaques trous
-            ->add('heureDepart', TimeType::class)
-            //->add('date',DateType::class)
-            ->add('cadence', TimeType::class)
+            ->add('heureDepart', IntegerType::class)
+            ->add('minuteDepart', IntegerType::class)
+            ->add('date',TextType::class)
+            ->add('cadence', IntegerType::class)
             ->add('fichier', FileType::class)
-            //->add('nomCompet', TextType::class)
-            //->add("nomGolf", TextType::class)
+            ->add('nomCompet', TextType::class)
+            ->add("nomGolf", TextType::class)
             ->add('save', SubmitType::class)
         ;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Competition;
 use App\Repository\CompetitionRepository;
 use App\Services\ExcelExtract;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
@@ -52,6 +53,8 @@ class IndexController extends AbstractController
         $trous = array(14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15);
         $heureDepart = 7;
         $minDepart = 30;
+        $nomCompet = $this->getDoctrine()->getRepository(Competition::class)->findBy(['nomCompet']);
+        dd($nomCompet);
 
         //(ExcelExtract::toHtmlTab());
 
@@ -70,8 +73,8 @@ class IndexController extends AbstractController
     public function pdfGenerator()
     {
         // TODO :: recuperer d'abord les infos nom competition et date depuis la db
-        $nomCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findBy();
-        $dateCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findBy();
+        $nomCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['name' => 'nom_compet']);
+        $dateCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['name' => 'date_compet']);
         $pdfFile = new Html2Pdf('L', 'A4', 'fr');
         $pdfFile->writeHTML(/*mettre le tableau ici*/);
         $nomPDF = str_replace(' ', '_', $nomCompet." du ".$dateCompet."_AwuziWazatus");

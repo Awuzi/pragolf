@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191020202731 extends AbstractMigration
+final class Version20191020222949 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20191020202731 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE competition ADD nom_compet LONGTEXT NOT NULL, ADD nom_golf LONGTEXT NOT NULL');
+        $this->addSql('ALTER TABLE competition DROP nom');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20191020202731 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE competition DROP nom_compet, DROP nom_golf');
+        $this->addSql('ALTER TABLE competition ADD nom VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci');
     }
 }
