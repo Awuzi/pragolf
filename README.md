@@ -35,7 +35,11 @@ Projet réalisé sous la Licence MIT
 
 ### **DOCUMENTATION**
 
-A COMPLETER
+Diagramme de classe : 
+https://puu.sh/EuMcH/b062a9193c.png
+
+Diagramme de cas d'utilisation : 
+https://puu.sh/EuMdr/0b7f6ebc27.png
 
 ### **BUG REPORT**
 
