@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompetitionRepository")
  */
@@ -54,6 +55,16 @@ class Competition
      * @ORM\Column(type="blob")
      */
     private $fichier;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $nomCompet;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $nomGolf;
 
     public function __construct()
     {
@@ -164,6 +175,30 @@ class Competition
     public function setFichier($fichier): self
     {
         $this->fichier = $fichier;
+
+        return $this;
+    }
+
+    public function getNomCompet(): ?string
+    {
+        return $this->nomCompet;
+    }
+
+    public function setNomCompet(string $nomCompet): self
+    {
+        $this->nomCompet = $nomCompet;
+
+        return $this;
+    }
+
+    public function getNomGolf(): ?string
+    {
+        return $this->nomGolf;
+    }
+
+    public function setNomGolf(string $nomGolf): self
+    {
+        $this->nomGolf = $nomGolf;
 
         return $this;
     }
