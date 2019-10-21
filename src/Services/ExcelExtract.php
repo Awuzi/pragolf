@@ -71,10 +71,15 @@ class ExcelExtract implements IReadFilter
         $path = "../public/assets/doc/partie.json";
         $newFile->touch($path); //creation du fichier partie.json
         //creation du fichier json et ecriture des infos
+
         $filename = '../public/assets/doc/partie.json';
         $newJsonFile = new File($filename);
-        $newJsonFile->openFile('w+')->fwrite(json_encode($file, JSON_UNESCAPED_UNICODE));
+        $newJsonFile
+            ->openFile('w+')
+            ->fwrite(json_encode($file, JSON_UNESCAPED_UNICODE));
         //recuperation du fichier pour extraction en tableau php
+
+
         $file = file_get_contents('../public/assets/doc/partie.json');
         $jsonfile = json_decode($file);
 

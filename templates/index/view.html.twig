@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container-fluid" style="font-size: 11px">
-        {{ joueurs[40][0] }} , le {{ joueurs[40][2] }} - {{ joueurs[40][1] }} inscrits
+        {{ parties[40][0] }} , le {{ parties[40][2] }} - {{ parties[40][1] }} inscrits
         <table class="table">
             <tr>
                 <th class="thead">
@@ -26,7 +26,7 @@
                     </th>
                 {% endfor %}
             </tr>
-            {% for partie in joueurs %}
+            {% for partie in parties %}
                 <tr>
                     <td>
                         #

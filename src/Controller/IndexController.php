@@ -45,22 +45,21 @@ class IndexController extends AbstractController
 
     /**
      * @Route("/view", name="view")
+     * @param ExcelExtract $excelExtract
+     * @return Response
      */
-    public function view()
+    public function view(ExcelExtract $excelExtract)
     {
-        $fichierJoueurs = ExcelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx');
-        $tableauJoueurs = ExcelExtract::phpToJson($fichierJoueurs);
-        $trous = array(14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15);
+        $fichierJoueurs = $excelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx');
+        $tableauJoueurs = $excelExtract::phpToJson($fichierJoueurs);
+        $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
         $heureDepart = 7;
         $minDepart = 30;
-        $nomCompet = $this->getDoctrine()->getRepository(Competition::class)->findBy(['nomCompet']);
-        dd($nomCompet);
 
-        //(ExcelExtract::toHtmlTab());
 
         return $this->render('index/view.html.twig', [
-            'joueurs' => $tableauJoueurs,
-            'trous' => $trous,
+            'parties' => $tableauJoueurs,
+            'trous' => $tempsTrous,
             'h' => $heureDepart,
             'm' => $minDepart,
         ]);
