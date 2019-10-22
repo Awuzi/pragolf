@@ -5,7 +5,10 @@
 {% block body %}
 
     <div class="container-fluid" style="font-size: 11px">
-        {{ parties[40][0] }} , le {{ parties[40][2] }} - {{ parties[40][1] }} inscrits
+        <h3>{{ info_compet.nomCompet }}, le {{ info_compet.date }} -- {{ parties|length }} parties. Heure Départ {{ info_compet.heureDepart }}h{{ info_compet.minuteDepart }}</h3>
+        {% set h = info_compet.heureDepart %}
+        {% set m = info_compet.minuteDepart %}
+        {% set cadence = info_compet.cadence %}
         <table class="table">
             <tr>
                 <th class="thead">
@@ -61,7 +64,7 @@
                     {% endfor %}
 
                 </tr>
-                {% set m = m + 11 %}
+                {% set m = m + cadence %}
                 {% if (m > 59) %}
                     {% set h = h + 1 %}
                     {% set m = m - 60 %}

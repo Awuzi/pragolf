@@ -57,17 +57,16 @@ class ExcelExtract implements IReadFilter
                 }
             }
         }
-        array_push($parties, $infoCompetition);
+        //array_push($parties, $infoCompetition);
 
 
-        return self::phpToJson($parties);
+        return self::phpToJson($parties); //return json tab
     }
 
 
     public static function phpToJson($file)
     {
-
-        $newFile = new Filesystem();
+        /*$newFile = new Filesystem();
         $path = "../public/assets/doc/partie.json";
         $newFile->touch($path); //creation du fichier partie.json
         //creation du fichier json et ecriture des infos
@@ -77,13 +76,10 @@ class ExcelExtract implements IReadFilter
         $newJsonFile
             ->openFile('w+')
             ->fwrite(json_encode($file, JSON_UNESCAPED_UNICODE));
-        //recuperation du fichier pour extraction en tableau php
-
-
-        $file = file_get_contents('../public/assets/doc/partie.json');
-        $jsonfile = json_decode($file);
-
-        return $jsonfile;
+        //recuperation du fichier pour extraction en tableau php*/
+        $f = json_encode($file);
+        //$file = file_get_contents('../public/assets/doc/partie.json');
+        return json_decode($f);
     }
 
     public function readCell($column, $row, $worksheetName = '')

@@ -65,6 +65,8 @@ class Competition
      * @ORM\Column(type="text")
      */
     private $nomGolf;
+    private $lieuGolf;
+    private $golfId;
 
     public function __construct()
     {
@@ -119,7 +121,7 @@ class Competition
         return $this->golf;
     }
 
-    public function gol(?Golf $golf): self
+    public function golf(?Golf $golf): self
     {
         $this->golf = $golf;
 
@@ -204,4 +206,36 @@ class Competition
 
         return $this;
     }
+
+
+    public function getLieuGolf()
+    {
+        return $this->lieuGolf;
+    }
+
+
+    public function setLieuGolf(string $lieuGolf): self
+    {
+        $this->lieuGolf = $lieuGolf;
+
+        return $this;
+    }
+
+
+    public function getGolfId()
+    {
+        return $this->golfId;
+    }
+
+
+    public function setGolfId(?int $golfId): self
+    {
+        $this->golfId = $golfId;
+
+        return $this;
+    }
+
+
+
+
 }

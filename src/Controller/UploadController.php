@@ -27,17 +27,14 @@ class UploadController extends AbstractController
         //instanciation d'un objet competition
         $competition = new Competition();
         $golf = new Golf();
-
         //creation du formulaire et liasion avec l'entité competition
         $form = $this->createForm(UploadFormType::class, $competition);
         $form->handleRequest($request);
 
         //si le formulaire est soumis et valide alors:
         if ($form->isSubmitted() && $form->isValid()) {
-
             //récuperation du fichier qui a été uploadé
             $file = $competition->getFichier();
-
             //stockage du futur nom du fichier que notre application connait
             $filename = "Fichier"."."."xlsx";
 
@@ -45,37 +42,38 @@ class UploadController extends AbstractController
             //est specifié dans services.yaml
             //chemin: '%kernel.project_dir%/public/assets/doc'
             $file->move($this->getParameter('upload_directory'), $filename);
-
             //renommage du fichier
             $competition->setFichier($filename);
 
-            //$nomCompet = $request->request->get('nomCompet');
-            //$nomgolf = $request->request->get('nomGolf');
+
             $heureDepart = $competition->getHeureDepart();
             $minuteDepart = $competition->getMinuteDepart();
-            $f = $competition->getFichier();
+            $fichier = $competition->getFichier();
             $date = $competition->getDate();
             $nomCompet = $competition->getNomCompet();
-            $nomgolf = $competition->getNomGolf();
-            //$golfid = $golf->getId();
+            $nomGolf = $competition->getNomGolf();
             $cadence = $competition->getCadence();
-            //dd([$heureDepart, $minuteDepart, $f, $date ,$nomgolf ,$nomCompet]);
+            $lieu = $competition->getLieuGolf();
+            $golfId = $golf->getId();
+            //dd([$heureDepart, $minuteDepart, $f, $date ,$nomGolf ,$nomCompet]);
             //envoie des champs heureCompet, cadence, nomCompet, nomGolf dans la base de données
-            //$entitymanager->persist($heureCompet);
+            $golf->setNom($nomGolf);
+            $golf->setLieu($lieu);
             $competition->setHeureDepart($heureDepart);
             $competition->setMinuteDepart($minuteDepart);
-            $competition->setFichier($f);
+            $competition->setGolfId($golfId);
+            $competition->setFichier($fichier);
             $competition->setDate($date);
             $competition->setCadence($cadence);
             $competition->setNomCompet($nomCompet);
-            $competition->setNomGolf($nomgolf);
-            //$competition->se($golfid);
-            //$cadence = $competition->getCadence();
-            //$entitymanager->persist($cadence);
+            $competition->setNomGolf($nomGolf);
+
+
+
+            $entitymanager->persist($golf);
             $entitymanager->persist($competition);
 
             $entitymanager->flush();
-
             //redirection vers la vue "view"
             return $this->redirectToRoute("view");
         }

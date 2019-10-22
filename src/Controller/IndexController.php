@@ -21,11 +21,7 @@ class IndexController extends AbstractController
      */
     public function index()
     {
-        $hello = 'Hello world';
-
-        return $this->render('index/index.html.twig', [
-            'hello' => $hello,
-        ]);
+        return $this->render('index/index.html.twig');
     }
 
 
@@ -53,15 +49,14 @@ class IndexController extends AbstractController
         $fichierJoueurs = $excelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx');
         $tableauJoueurs = $excelExtract::phpToJson($fichierJoueurs);
         $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
-        $heureDepart = 7;
-        $minDepart = 30;
+
+        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => 8]);
 
 
         return $this->render('index/view.html.twig', [
+            'info_compet' => $info_compet,
             'parties' => $tableauJoueurs,
             'trous' => $tempsTrous,
-            'h' => $heureDepart,
-            'm' => $minDepart,
         ]);
     }
 
@@ -72,7 +67,8 @@ class IndexController extends AbstractController
     public function pdfGenerator()
     {
         // TODO :: recuperer d'abord les infos nom competition et date depuis la db
-        $nomCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['name' => 'nom_compet']);
+        $nomCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['nom_compet' => 'sss']);
+        dd($nomCompet);
         $dateCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['name' => 'date_compet']);
         $pdfFile = new Html2Pdf('L', 'A4', 'fr');
         $pdfFile->writeHTML(/*mettre le tableau ici*/);

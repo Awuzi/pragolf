@@ -13,11 +13,8 @@ class ExcelExtractTest extends TestCase
         $e = new ExcelExtract();
         $fichier = '../public/assets/doc/Fichier.xlsx';
         $attendu = '117 joueurs';
-        try {
-            $this->assertContains($attendu, $e::ExceltoPhp($fichier));
-        } catch (\Exception $e) {
-            $e->getMessage();
-        }
+        $this->assertIsArray($e::ExceltoPhp($fichier));
+
 
     }
 

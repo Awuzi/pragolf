@@ -26,6 +26,7 @@ class UploadFormType extends AbstractType
             ->add('fichier', FileType::class)
             ->add('nomCompet', TextType::class)
             ->add("nomGolf", TextType::class)
+            ->add("lieuGolf", TextType::class)
             ->add('save', SubmitType::class)
         ;
     }
