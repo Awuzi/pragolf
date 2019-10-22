@@ -50,6 +50,7 @@ class IndexController extends AbstractController
         $tableauJoueurs = $excelExtract::phpToJson($fichierJoueurs);
         $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
 
+        // TODO :: trouver comment faire un findByLast('id)
         $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => 8]);
 
 
@@ -67,6 +68,7 @@ class IndexController extends AbstractController
     public function pdfGenerator()
     {
         // TODO :: recuperer d'abord les infos nom competition et date depuis la db
+        // TODO :: utiliser une autre librairie pour le pdf, à voir laquelle !
         $nomCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['nom_compet' => 'sss']);
         dd($nomCompet);
         $dateCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['name' => 'date_compet']);

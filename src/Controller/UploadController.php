@@ -69,11 +69,11 @@ class UploadController extends AbstractController
             $competition->setNomGolf($nomGolf);
 
 
-
             $entitymanager->persist($golf);
             $entitymanager->persist($competition);
 
             $entitymanager->flush();
+
             //redirection vers la vue "view"
             return $this->redirectToRoute("view");
         }
