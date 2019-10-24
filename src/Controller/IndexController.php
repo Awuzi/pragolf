@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Competition;
-use App\Repository\CompetitionRepository;
 use App\Services\ExcelExtract;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Html2Pdf;
@@ -51,9 +50,9 @@ class IndexController extends AbstractController
         $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
 
         // TODO :: trouver comment faire un findByLast('id)
-        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => 8]);
+        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => '11']);
 
-
+        //$html = file_get_contents('../../templates/index/view.html.twig');
         return $this->render('index/view.html.twig', [
             'info_compet' => $info_compet,
             'parties' => $tableauJoueurs,
@@ -62,19 +61,26 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route ("/generatepdf", name="pdf")
+     * @Route ("/pdf", name="pdf")
+     * @param ExcelExtract $excelExtract
      * @throws Html2PdfException
      */
-    public function pdfGenerator()
+    public function pdfGenerator(ExcelExtract $excelExtract)
     {
-        // TODO :: recuperer d'abord les infos nom competition et date depuis la db
-        // TODO :: utiliser une autre librairie pour le pdf, à voir laquelle !
-        $nomCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['nom_compet' => 'sss']);
-        dd($nomCompet);
-        $dateCompet = $this->getDoctrine()->getManager()->getRepository(CompetitionRepository::class)->findOneBy(['name' => 'date_compet']);
+        // TODO :: à voir comment ne pas avoir de doublon de code avec la methode view
+        $fichierJoueurs = $excelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx');
+        $tableauJoueurs = $excelExtract::phpToJson($fichierJoueurs);
+        $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
+        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => '11']);
+
+        $template = $this->renderView('index/pdf.html.twig', [
+            'info_compet' => $info_compet,
+            'parties' => $tableauJoueurs,
+            'trous' => $tempsTrous,
+        ]);
+
         $pdfFile = new Html2Pdf('L', 'A4', 'fr');
-        $pdfFile->writeHTML(/*mettre le tableau ici*/);
-        $nomPDF = str_replace(' ', '_', $nomCompet." du ".$dateCompet."_AwuziWazatus");
-        $pdfFile->output($nomPDF.".pdf");
+        $pdfFile->writeHTML($template);
+        $pdfFile->output("compet.pdf");
     }
 }
