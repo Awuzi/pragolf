@@ -4,8 +4,18 @@
 
 {% block body %}
 
+    {# calcul du nb de joueurs total selon le multitableau reçu #}
+    {% set n = 0 %}
+    {% for noms in parties %}
+        {% for player in noms %}
+            {% for j in player %}
+                {% set n = n + 1 %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+
     <div class="container-fluid" style="font-size: 11px">
-        <h3>{{ info_compet.nomCompet }}, le {{ info_compet.date }} -- {{ parties|length }} parties. Heure Départ {{ info_compet.heureDepart }}h{{ info_compet.minuteDepart }}</h3>
+        <h3>{{ info_compet.nomCompet }}, le {{ info_compet.date }} -- {{ n }} joueurs. Heure Départ {{ info_compet.heureDepart }}h{{ info_compet.minuteDepart }}</h3>
         {% set h = info_compet.heureDepart %}
         {% set m = info_compet.minuteDepart %}
         {% set cadence = info_compet.cadence %}

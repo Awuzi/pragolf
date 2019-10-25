@@ -36,7 +36,7 @@
                     <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link">Deconnexion</a></li>
                 {% elseif app.user and app.user.roles[0] == 'ROLE_ADMIN' %}
                     <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link">Deconnexion</a></li>
-                    <li class="nav-item" style="color: red;"><a href="{{ path('admin') }}">Admin</a></li>
+                    <li class="nav-item" style="color: red;"><a href="{{ path('backoffice') }}">Admin</a></li>
                 {% else %}
                     <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link">Connexion</a></li>
                 {% endif %}

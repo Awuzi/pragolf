@@ -50,7 +50,7 @@ class IndexController extends AbstractController
         $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
 
         // TODO :: trouver comment faire un findByLast('id)
-        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => '11']);
+        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => '1']);
 
         //$html = file_get_contents('../../templates/index/view.html.twig');
         return $this->render('index/view.html.twig', [
@@ -71,7 +71,7 @@ class IndexController extends AbstractController
         $fichierJoueurs = $excelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx');
         $tableauJoueurs = $excelExtract::phpToJson($fichierJoueurs);
         $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
-        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => '11']);
+        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => '1']);
 
         $template = $this->renderView('index/pdf.html.twig', [
             'info_compet' => $info_compet,
