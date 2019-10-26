@@ -24,16 +24,14 @@ class UploadController extends AbstractController
     {
         $competition = new Competition();
         $golf = new Golf();
-
-        $nomsGolf = [];
-
         //generation entitymanager
         $entitymanager = $this->getDoctrine()->getManager();
 
+/*        $nomsGolf = [];
         $golfs = $this->getDoctrine()->getRepository(Golf::class)->findAll();
         foreach ($golfs as $golf) {
             $nomsGolf[$golf->getNom()] = $golf->getId();
-        }
+        }*/
 
         //dd($nomsGolf);
         //instanciation d'un objet competition
@@ -63,23 +61,20 @@ class UploadController extends AbstractController
             $fichier = $competition->getFichier();
             $date = $competition->getDate();
             $nomCompet = $competition->getNomCompet();
-            $nomGolf = $competition->getNomGolf();
             $cadence = $competition->getCadence();
-            $lieu = $competition->getLieuGolf();
-            $golfId = $golf->getId();
-            //dd([$heureDepart, $minuteDepart, $f, $date ,$nomGolf ,$nomCompet]);
+
             //envoie des champs heureCompet, cadence, nomCompet, nomGolf dans la base de données
-            $golf->setNom($nomGolf)
-                ->setLieu($lieu);
+            $golf->setNom($competition->getNomGolf())
+                ->setLieu($competition->getLieuGolf());
             $competition->setHeureDepart($heureDepart)
                 ->setMinuteDepart($minuteDepart)
                 ->setFichier($filename)
                 ->setDate($date)
                 ->setNomCompet($nomCompet)
-                ->setNomGolf($nomGolf)
+                ->setNomGolf($competition->getNomGolf())
                 ->setFichier($fichier)
                 ->setCadence($cadence)
-                ->setGolfId($golfId);
+                ->setGolfId($golf->getId());
 
 
             $entitymanager->persist($golf);

@@ -1,0 +1,41 @@
+{% extends 'root.html.twig' %}
+
+{% block title %}Gestion Golfs{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Gestions des Utilisateurs</h1>
+
+        <table class="table table-striped table-middle-aligned">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Login</th>
+                <th scope="col">Password</th>
+                <th scope="col">Role</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username}}</td>
+                    <td> ********** </td>
+                    <td> {{ user.roles[0] }} </td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-primary">Supprimer</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+
+
+{% endblock %}

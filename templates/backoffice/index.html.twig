@@ -1,8 +1,22 @@
 {% extends 'root.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Gestion Golfs{% endblock %}
 
 {% block body %}
-{{ dump(app) }}
-    <p>faire un style different pour le panel admin</p>
+    <div class="container">
+
+        <h1 class="h1 title-container mt-4" align="center">Réservé à l'administrateur</h1>
+
+        <div class="m-5" align="center">
+
+            <a href="{{ path('backoffice_golf') }}" class="btn btn-outline-info mr-5 font-weight-bold">Gestion des golfs</a>
+            <a href="{{ path('backoffice_user') }}" class="btn btn-outline-info ml-5 font-weight-bold">Gestion des utilisateurs</a>
+
+        </div>
+
+    </div>
+
+
+
+
 {% endblock %}
