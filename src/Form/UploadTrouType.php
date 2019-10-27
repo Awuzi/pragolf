@@ -11,33 +11,14 @@ class UploadTrouType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add("Trou1", TextType::class)
-            ->add("Trou2", TextType::class)
-            ->add("Trou3", TextType::class)
-            ->add("Trou4", TextType::class)
-            ->add("Trou5", TextType::class)
-            ->add("Trou6", TextType::class)
-            ->add("Trou6", TextType::class)
-            ->add("Trou7", TextType::class)
-            ->add("Trou8", TextType::class)
-            ->add("Trou9", TextType::class)
-            ->add("Trou10", TextType::class)
-            ->add("Trou11", TextType::class)
-            ->add("Trou12", TextType::class)
-            ->add("Trou13", TextType::class)
-            ->add("Trou14", TextType::class)
-            ->add("Trou15", TextType::class)
-            ->add("Trou16", TextType::class)
-            ->add("Trou17", TextType::class)
-            ->add("Trou18", TextType::class)
-        ;
+        for ($i = 1; $i <= 18; ++$i) {
+            $builder->add("Trou"."$i", TextType::class);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            // Configure your form options here
+        $resolver->setDefaults([// Configure your form options here
         ]);
     }
 }

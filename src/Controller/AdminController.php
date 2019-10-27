@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Golf;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -45,5 +46,17 @@ class AdminController extends AbstractController
         return $this->render('backoffice/users.html.twig', [
             'users' => $users,
         ]);
+    }
+
+    /**
+     * @Route("/backoffice/golf/add", name="add_golf")
+     * @param Request $request
+     * @param Golf $golf
+     * @return Response
+     */
+    public function addGolf(Request $request, Golf $golf)
+    {
+        //mettre le formualire pour add un gofl avec nomgolf et lieu golf
+        return $this->redirectToRoute('backoffice_golf');
     }
 }

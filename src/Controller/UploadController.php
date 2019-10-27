@@ -39,36 +39,36 @@ class UploadController extends AbstractController
 
         //si le formulaire est soumis et valide alors:
         if ($form->isSubmitted() && $form->isValid()) {
-            //récuperation du fichier qui a été uploadé
-            $file = $competition->getFichier();
-            //stockage du futur nom du fichier que notre application connait
             $filename = "Fichier.xlsx";
 
             //déplacement du fichier dans l'upload directory dont le chemin
             //est specifié dans services.yaml
             //chemin: '%kernel.project_dir%/public/assets/doc'
-            $file->move($this->getParameter('upload_directory'), $filename);
+            $golfDatas = $form->get('golf')->getData();
 
-            //assignation des valeurs a une variable qui peut être envoyée dans la bdd
             $heureDepart = $competition->getHeureDepart();
             $minuteDepart = $competition->getMinuteDepart();
             $fichier = $competition->getFichier();
             $date = $competition->getDate();
             $nomCompet = $competition->getNomCompet();
             $cadence = $competition->getCadence();
+            //envoie des champs heureCompet, cadence, nomCompet, nomGolf dans la base de données
+            $golf->setNom($golfDatas->getNom())
+                ->setLieu($golfDatas->getLieu());
 
-            //envoie des variables correspondant aux champs heureCompet, cadence, nomCompet, nomGolf dans la base de données
-            $golf->setNom($competition->getNomGolf())
-                ->setLieu($competition->getLieuGolf());
-            $competition->setHeureDepart($heureDepart)
+
+            $competition->setGolfId($golfDatas->getId())->setNomGolf($golfDatas->getNom())
+                ->setHeureDepart($heureDepart)
                 ->setMinuteDepart($minuteDepart)
                 ->setFichier($filename)
                 ->setDate($date)
                 ->setNomCompet($nomCompet)
-                ->setNomGolf($competition->getNomGolf())
                 ->setFichier($fichier)
-                ->setCadence($cadence)
-                ->setGolfId($golf->getId());
+                ->setCadence($cadence);
+
+            //récuperation du fichier qui a été uploadé
+            //stockage du futur nom du fichier que notre application connait
+            $fichier->move($this->getParameter('upload_directory'), $filename);
 
             //persist pour l'envoie dans les tables
             $entitymanager->persist($golf);
@@ -80,6 +80,8 @@ class UploadController extends AbstractController
             return $this->redirectToRoute("view");
         }
 
-        return $this->render('upload/upload.html.twig', array('form' => $form->createView()));
+        return $this->render('upload/upload.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
