@@ -27,17 +27,12 @@ class UploadController extends AbstractController
         //generation entitymanager
         $entitymanager = $this->getDoctrine()->getManager();
 
-/*        $nomsGolf = [];
-        $golfs = $this->getDoctrine()->getRepository(Golf::class)->findAll();
-        foreach ($golfs as $golf) {
-            $nomsGolf[$golf->getNom()] = $golf->getId();
-        }*/
-
-        //dd($nomsGolf);
         //instanciation d'un objet competition
 
         //creation du formulaire et liasion avec l'entité competition
         $form = $this->createForm(UploadFormType::class, $competition);
+
+
 
 
         $form->handleRequest($request);
@@ -53,9 +48,8 @@ class UploadController extends AbstractController
             //est specifié dans services.yaml
             //chemin: '%kernel.project_dir%/public/assets/doc'
             $file->move($this->getParameter('upload_directory'), $filename);
-            //renommage du fichier
 
-
+            //assignation des valeurs a une variable qui peut être envoyée dans la bdd
             $heureDepart = $competition->getHeureDepart();
             $minuteDepart = $competition->getMinuteDepart();
             $fichier = $competition->getFichier();
@@ -63,7 +57,7 @@ class UploadController extends AbstractController
             $nomCompet = $competition->getNomCompet();
             $cadence = $competition->getCadence();
 
-            //envoie des champs heureCompet, cadence, nomCompet, nomGolf dans la base de données
+            //envoie des variables correspondant aux champs heureCompet, cadence, nomCompet, nomGolf dans la base de données
             $golf->setNom($competition->getNomGolf())
                 ->setLieu($competition->getLieuGolf());
             $competition->setHeureDepart($heureDepart)
@@ -76,10 +70,10 @@ class UploadController extends AbstractController
                 ->setCadence($cadence)
                 ->setGolfId($golf->getId());
 
-
+            //persist pour l'envoie dans les tables
             $entitymanager->persist($golf);
             $entitymanager->persist($competition);
-
+            //envoie de la requete
             $entitymanager->flush();
 
             //redirection vers la vue "view"
