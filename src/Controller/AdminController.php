@@ -51,12 +51,35 @@ class AdminController extends AbstractController
     /**
      * @Route("/backoffice/golf/add", name="add_golf")
      * @param Request $request
-     * @param Golf $golf
      * @return Response
      */
-    public function addGolf(Request $request, Golf $golf)
+    public function addGolf(Request $request)
     {
-        //mettre le formualire pour add un gofl avec nomgolf et lieu golf
+        $golf = new Golf();
+        $em = $this->getDoctrine()->getManager();
+        $newName = $request->request->get('newGoflName');
+        $newLocation = $request->request->get('newGoflLocation');
+        $golf->setNom($newName)->setLieu($newLocation);
+
+        $em->persist($golf);
+        $em->flush();
+
+        return $this->redirectToRoute('backoffice_golf');
+    }
+
+    /**
+     * @Route("/backoffice/golf/remove/{id}", name="remove_golf")
+     * @param $id
+     * @return Response
+     */
+    public function removeGolf($id)
+    {
+        $golf = new Golf();
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(Golf::class)->find($id);
+        $em->remove($user);
+        $em->flush();
+
         return $this->redirectToRoute('backoffice_golf');
     }
 }

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 
 use App\Entity\Competition;
-use App\Entity\Golf;
 use App\Form\UploadFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,27 +22,16 @@ class UploadController extends AbstractController
     public function upload(Request $request)
     {
         $competition = new Competition();
-        $golf = new Golf();
-        //generation entitymanager
         $entitymanager = $this->getDoctrine()->getManager();
-
-        //instanciation d'un objet competition
 
         //creation du formulaire et liasion avec l'entité competition
         $form = $this->createForm(UploadFormType::class, $competition);
 
-
-
-
         $form->handleRequest($request);
 
-        //si le formulaire est soumis et valide alors:
         if ($form->isSubmitted() && $form->isValid()) {
             $filename = "Fichier.xlsx";
 
-            //déplacement du fichier dans l'upload directory dont le chemin
-            //est specifié dans services.yaml
-            //chemin: '%kernel.project_dir%/public/assets/doc'
             $golfDatas = $form->get('golf')->getData();
 
             $heureDepart = $competition->getHeureDepart();
@@ -52,10 +40,6 @@ class UploadController extends AbstractController
             $date = $competition->getDate();
             $nomCompet = $competition->getNomCompet();
             $cadence = $competition->getCadence();
-            //envoie des champs heureCompet, cadence, nomCompet, nomGolf dans la base de données
-            $golf->setNom($golfDatas->getNom())
-                ->setLieu($golfDatas->getLieu());
-
 
             $competition->setGolfId($golfDatas->getId())->setNomGolf($golfDatas->getNom())
                 ->setHeureDepart($heureDepart)
@@ -70,13 +54,11 @@ class UploadController extends AbstractController
             //stockage du futur nom du fichier que notre application connait
             $fichier->move($this->getParameter('upload_directory'), $filename);
 
-            //persist pour l'envoie dans les tables
-            $entitymanager->persist($golf);
             $entitymanager->persist($competition);
-            //envoie de la requete
             $entitymanager->flush();
 
             //redirection vers la vue "view"
+            $c = new IndexController();
             return $this->redirectToRoute("view");
         }
 

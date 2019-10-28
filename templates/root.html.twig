@@ -9,9 +9,13 @@
 </head>
 <body>
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="{{ path('backoffice') }}">BackOffice</a>
     <a class="navbar-brand" href="{{ path('index') }}">Accueil</a>
-    <a class="navbar-brand" href="{{ path('app_logout') }}">Deconnexion</a>
+    {% if (app.user) %}
+        {% if (app.user.roles[0] == "ROLE_ADMIN") %}
+            <a class="navbar-brand" href="{{ path('backoffice') }}">BackOffice</a>
+            <a class="navbar-brand" href="{{ path('app_logout') }}">Deconnexion</a>
+        {% endif %}
+    {% endif %}
 </nav>
 {% block body %}
 

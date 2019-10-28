@@ -28,17 +28,20 @@ class UploadFormType extends AbstractType
                     return $e->createQueryBuilder('g')->orderBy('g.nom', 'ASC');
                 },
                 'choice_value' => 'nom',
-                'placeholder' => 'Choisissez un Golf'
+                'placeholder' => '-- Choisissez un Golf --'
             ])
-            ->add('nomCompet', TextType::class)
+            ->add('nomCompet', TextType::class, [
+                'label' => 'Nom Competition'
+            ])
             ->add('date',TextType::class, [
-                'empty_data' => date("d/m/Y")
+                'data' => date("d/m/Y"),
+                'label' => 'Date Compétition'
             ])
             ->add('heureDepart', ChoiceType::class, [
                 'choices' => [
                     '7' => '7',
-                    '8' => '8'
-                ]
+                ],
+                'label' => 'Heure de départ'
             ])
             ->add('minuteDepart', ChoiceType::class, [
                 'choices' => [
@@ -46,7 +49,8 @@ class UploadFormType extends AbstractType
                     '30' => '30'
                 ]
             ])
-            ->add('cadence', IntegerType::class)
+            ->add('cadence', IntegerType::class, [
+                'data' => 11 ])
             ->add('fichier', FileType::class)
             ->add('save', SubmitType::class);
             //            ->add("nomGolf", ChoiceType::class, [

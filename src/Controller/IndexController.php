@@ -14,6 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
+
+
+    private $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
+
+
     /**
      * @Route("/", name="index")
      * @return Response
@@ -31,7 +36,6 @@ class IndexController extends AbstractController
     public function remove()
     {
         $f = new Filesystem();
-        $f->remove('../public/assets/doc/partie.json');
         $f->remove('../public/assets/doc/Fichier.xlsx');
 
         return $this->redirectToRoute("index");
@@ -45,12 +49,9 @@ class IndexController extends AbstractController
      */
     public function view(ExcelExtract $excelExtract)
     {
-        $fichierJoueurs = $excelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx');
-        $tableauJoueurs = $excelExtract::phpToJson($fichierJoueurs);
-        $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
-
-        // TODO :: trouver comment faire un findByLast('id)
-        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => '1']);
+        $tableauJoueurs = $excelExtract::phpToJson($excelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx'));
+        $tempsTrous = $this->tempsTrous;
+        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy([], ['id' => 'DESC']);
 
         //$html = file_get_contents('../../templates/index/view.html.twig');
         return $this->render('index/view.html.twig', [
@@ -67,11 +68,9 @@ class IndexController extends AbstractController
      */
     public function pdfGenerator(ExcelExtract $excelExtract)
     {
-        // TODO :: à voir comment ne pas avoir de doublon de code avec la methode view
-        $fichierJoueurs = $excelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx');
-        $tableauJoueurs = $excelExtract::phpToJson($fichierJoueurs);
-        $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
-        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy(['id' => '1']);
+        $tableauJoueurs = $excelExtract::phpToJson($excelExtract::ExceltoPhp('../public/assets/doc/Fichier.xlsx'));
+        $tempsTrous = $this->tempsTrous;
+        $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy([], ['id' => 'DESC']);
 
         $template = $this->renderView('index/pdf.html.twig', [
             'info_compet' => $info_compet,

@@ -3,14 +3,32 @@
 {% block title %}Gestion Golfs{% endblock %}
 
 {% block body %}
+    <div class="container col-md-6">
+        <form action="{{ path('add_golf') }}" method="post" class="m-4">
+            <h2>Ajouter un golf</h2>
+
+            <div class="row">
+                <div class="col">
+                    <label for="name">Nom</label>
+                    <input type="text" name="newGoflName" id="name" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="location">Lieu</label>
+                    <input type="text" name="newGoflLocation" id="location" class="form-control">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-success m-3">Ajouter golf</button>
+        </form>
+    </div>
+
+
     <div class="container">
+
         <h1>Gestions des Golfs</h1>
-        <div class="m-2">
-            <a href="{{ path('add_golf') }}" class="btn btn-sm btn-primary">Ajouter un Golf</a>
-        </div>
         <table class="table table-striped table-middle-aligned">
             <thead>
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Lieu</th>
                 <th scope="col">Actions</th>
@@ -19,17 +37,16 @@
             <tbody>
             {% for golf in golfs %}
                 <tr>
+                    <td>{{ golf.id }}</td>
                     <td>{{ golf.nom }}</td>
                     <td>{{ golf.lieu }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-danger">Supprimer</a>
+                        <a href="{{ path('remove_golf', {'id': golf.id}) }}" class="btn btn-sm btn-danger">Supprimer</a>
                     </td>
                 </tr>
-
             {% endfor %}
             </tbody>
         </table>
-
 
     </div>
 

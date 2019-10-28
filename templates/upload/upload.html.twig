@@ -1,8 +1,29 @@
 {% extends 'root.html.twig' %}
 
 {% block body %}
-    <div class="container mt-4 col-md-3">
-        {{ form(form) }}
+    <div class="container mt-4 col-md-4">
+        {{ form_start(form) }}
+        {{ form_label(form.golf, 'Choisissez un golf') }}
+        {{ form_widget(form.golf) }}
+        {{ form_label(form.nomCompet, 'Nom de la Compétition') }}
+        {{ form_widget(form.nomCompet) }}
+        {{ form_label(form.date, 'Date de la Compétition') }}
+        {{ form_widget(form.date) }}
+        <div class="row">
+            <div class="col">
+                {{ form_label(form.heureDepart, 'Heure') }}
+                {{ form_widget(form.heureDepart) }}
+            </div>
+            <div class="col">
+                {{ form_label(form.minuteDepart, 'Minute') }}
+                {{ form_widget(form.minuteDepart) }}
+            </div>
+        </div>
+        {{ form_label(form.fichier, 'Déposer le tableau Excel') }}
+        {{ form_widget(form.fichier) }}
+        {{ form_end(form) }}
+
+
     </div>
 {% endblock %}
 
