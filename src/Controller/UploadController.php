@@ -46,7 +46,9 @@ class UploadController extends AbstractController
             $nomCompet = $competition->getNomCompet();
             $cadence = $competition->getCadence();
 
-            $competition->setGolfId($golfDatas->getId())->setNomGolf($golfDatas->getNom())
+            $competition
+                ->setGolfId($golfDatas->getId())
+                ->setNomGolf($golfDatas->getNom())
                 ->setHeureDepart($heureDepart)
                 ->setMinuteDepart($minuteDepart)
                 ->setFichier($filename)
@@ -85,6 +87,8 @@ class UploadController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted()&&$form->isValid()){
+            //recuperation des donnees dans des variables permettant d'hydrater le formulaire
+            $golfID = $trou->getGolfID();
             $trou1=$trou->getTrou1();
             $trou2=$trou->getTrou2();
             $trou3=$trou->getTrou3();
@@ -103,6 +107,31 @@ class UploadController extends AbstractController
             $trou16=$trou->getTrou16();
             $trou17=$trou->getTrou17();
             $trou18=$trou->getTrou18();
+
+            //hydratation du formulaire avec les donnees récupérées
+            $trou
+                ->setGolfID($golfID)
+                ->setTrou1($trou1)
+                ->setTrou2($trou2)
+                ->setTrou3($trou3)
+                ->setTrou4($trou4)
+                ->setTrou5($trou5)
+                ->setTrou6($trou6)
+                ->setTrou7($trou7)
+                ->setTrou8($trou8)
+                ->setTrou9($trou9)
+                ->setTrou10($trou10)
+                ->setTrou11($trou11)
+                ->setTrou12($trou12)
+                ->setTrou13($trou13)
+                ->setTrou14($trou14)
+                ->setTrou15($trou15)
+                ->setTrou16($trou16)
+                ->setTrou17($trou17)
+                ->setTrou18($trou18);
+
+                $entitymanager->persist($trou);
+                $entitymanager->flush();
         }
         return $this->render('upload/uploadTrou.html.twig', [
             'form' => $form->createView()

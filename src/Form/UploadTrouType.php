@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +17,7 @@ class UploadTrouType extends AbstractType
             $builder->add("Trou"."$i", TextType::class);
         }*/
         $builder
-            ->add("GolfID", TextType::class)
+            ->add("GolfId", TextType::class)
             ->add("Trou1", TextType::class)
             ->add("Trou2", TextType::class)
             ->add("Trou3", TextType::class)
@@ -35,6 +36,7 @@ class UploadTrouType extends AbstractType
             ->add("Trou16", TextType::class)
             ->add("Trou17", TextType::class)
             ->add("Trou18", TextType::class)
+            ->add('save', SubmitType::class);
             ;
 
     }
