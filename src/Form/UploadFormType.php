@@ -53,10 +53,8 @@ class UploadFormType extends AbstractType
                 'data' => 11 ])
             ->add('fichier', FileType::class)
             ->add('save', SubmitType::class);
-            //            ->add("nomGolf", ChoiceType::class, [
-            //                'choices' => $golf->getNom()
-            //            ])
-            //TODO :: rajouter choice type pour lister les golfs
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

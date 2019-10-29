@@ -4,7 +4,9 @@ namespace App\Controller;
 
 
 use App\Entity\Competition;
+use App\Entity\UploadTrou;
 use App\Form\UploadFormType;
+use App\Form\UploadTrouType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,8 +23,11 @@ class UploadController extends AbstractController
      */
     public function upload(Request $request)
     {
-        $competition = new Competition();
         $entitymanager = $this->getDoctrine()->getManager();
+
+        $competition = new Competition();
+
+
 
         //creation du formulaire et liasion avec l'entité competition
         $form = $this->createForm(UploadFormType::class, $competition);
@@ -65,5 +70,33 @@ class UploadController extends AbstractController
         return $this->render('upload/upload.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/uploadTrou", name="uploadTrou")
+     */
+    public function uploadTrou(Request $request){
+        $entitymanager = $this->getDoctrine()->getManager();
+        $trou = new UploadTrou();
+
+        $form = $this->createForm(UploadTrouType::class, $trou);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&&$form->isValid()){
+            $trou1=$trou->getTrou1();
+            $trou2=$trou->getTrou2();
+            $trou3=$trou->getTrou3();
+            $trou4=$trou->getTrou4();
+            $trou5=$trou->getTrou5();
+            $trou6=$trou->getTrou6();
+            $trou7=$trou->getTrou1();
+            $trou8=$trou->getTrou1();
+            $trou9=$trou->getTrou1();
+            $trou10=$trou->getTrou1();
+            $trou11=$trou->getTrou1();
+
+        }
+
     }
 }
