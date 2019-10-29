@@ -16,7 +16,7 @@ class UploadTrouType extends AbstractType
             $builder->add("Trou"."$i", TextType::class);
         }*/
         $builder
-            -add("GolfID", TextType::class)
+            ->add("GolfID", TextType::class)
             ->add("Trou1", TextType::class)
             ->add("Trou2", TextType::class)
             ->add("Trou3", TextType::class)

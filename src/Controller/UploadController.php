@@ -75,6 +75,7 @@ class UploadController extends AbstractController
     /**
      * @param Request $request
      * @Route("/uploadTrou", name="uploadTrou")
+     * @return RedirectResponse|Response
      */
     public function uploadTrou(Request $request){
         $entitymanager = $this->getDoctrine()->getManager();
@@ -90,13 +91,21 @@ class UploadController extends AbstractController
             $trou4=$trou->getTrou4();
             $trou5=$trou->getTrou5();
             $trou6=$trou->getTrou6();
-            $trou7=$trou->getTrou1();
-            $trou8=$trou->getTrou1();
-            $trou9=$trou->getTrou1();
-            $trou10=$trou->getTrou1();
-            $trou11=$trou->getTrou1();
-
+            $trou7=$trou->getTrou7();
+            $trou8=$trou->getTrou8();
+            $trou9=$trou->getTrou9();
+            $trou10=$trou->getTrou10();
+            $trou11=$trou->getTrou11();
+            $trou12=$trou->getTrou12();
+            $trou13=$trou->getTrou13();
+            $trou14=$trou->getTrou14();
+            $trou15=$trou->getTrou15();
+            $trou16=$trou->getTrou16();
+            $trou17=$trou->getTrou17();
+            $trou18=$trou->getTrou18();
         }
-
+        return $this->render('upload/uploadTrou.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
