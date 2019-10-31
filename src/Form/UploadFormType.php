@@ -50,7 +50,8 @@ class UploadFormType extends AbstractType
                 ]
             ])
             ->add('cadence', IntegerType::class, [
-                'data' => 11 ])
+                'data' => 11 ,
+                'label' => 'Cadence de jeu entre les parties'])
             ->add('fichier', FileType::class)
             ->add('save', SubmitType::class);
 
