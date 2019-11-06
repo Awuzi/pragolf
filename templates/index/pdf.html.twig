@@ -9,7 +9,9 @@
     {% endfor %}
 
 <div class="container-fluid" style="font-size: 11px">
-    <h3>{{ info_compet.nomCompet }}, le {{ info_compet.date }} -- {{ n }} joueurs. Heure Départ {{ info_compet.heureDepart }}h{% if info_compet.minuteDepart == '0' %}{{ '00' }}{% endif %}</h3>
+    <h3>{{ info_compet.nomCompet }}, le {{ info_compet.date }} -- {{ n }} joueurs.
+        Heure Départ : {{ info_compet.heureDepart }}h{% if info_compet.minuteDepart == '0' %}{{ '00' }}{% else %}{{ info_compet.minuteDepart }}{% endif %}
+    </h3>
     {% set h = info_compet.heureDepart %}
     {% set m = info_compet.minuteDepart %}
     {% set cadence = info_compet.cadence %}
