@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
 
-
+    //TODO request la bdd avec id correspondant du golf pour recuperer les 18 trous
     private $tempsTrous = [14, 15, 13, 17, 17, 16, 14, 19, 12, 15, 14, 18, 16, 13, 14, 17, 13, 15];
 
 

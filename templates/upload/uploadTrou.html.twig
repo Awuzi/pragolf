@@ -1,1 +1,45 @@
-{{ form(form) }}
+{% extends 'root.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4 col-md-4">
+    {{ form_start(form) }}
+    {{ form_label(form.GolfId, "Choisissez l'id du golf de la competition ") }}
+    {{ form_widget(form.GolfId) }}
+    {{ form_label(form.Trou1, 'Choisissez un temps de marche pour le trou 1 ') }}
+    {{ form_widget(form.Trou1) }}
+    {{ form_label(form.Trou2, 'Choisissez un temps de marche pour le trou 2 ') }}
+    {{ form_widget(form.Trou2) }}
+    {{ form_label(form.Trou3, 'Choisissez un temps de marche pour le trou 3 ') }}
+    {{ form_widget(form.Trou3) }}
+    {{ form_label(form.Trou4, 'Choisissez un temps de marche pour le trou 4 ') }}
+    {{ form_widget(form.Trou4) }}
+    {{ form_label(form.Trou5, 'Choisissez un temps de marche pour le trou 5 ') }}
+    {{ form_widget(form.Trou5) }}
+    {{ form_label(form.Trou6, 'Choisissez un temps de marche pour le trou 6 ') }}
+    {{ form_widget(form.Trou6) }}
+    {{ form_label(form.Trou7, 'Choisissez un temps de marche pour le trou 7 ') }}
+    {{ form_widget(form.Trou7) }}
+    {{ form_label(form.Trou8, 'Choisissez un temps de marche pour le trou 8 ') }}
+    {{ form_widget(form.Trou8) }}
+    {{ form_label(form.Trou9, 'Choisissez un temps de marche pour le trou 9 ') }}
+    {{ form_widget(form.Trou9) }}
+    {{ form_label(form.Trou10, 'Choisissez un temps de marche pour le trou 10 ') }}
+    {{ form_widget(form.Trou10) }}
+    {{ form_label(form.Trou11, 'Choisissez un temps de marche pour le trou 11 ') }}
+    {{ form_widget(form.Trou11) }}
+    {{ form_label(form.Trou12, 'Choisissez un temps de marche pour le trou 12 ') }}
+    {{ form_widget(form.Trou12) }}
+    {{ form_label(form.Trou13, 'Choisissez un temps de marche pour le trou 13 ') }}
+    {{ form_widget(form.Trou13) }}
+    {{ form_label(form.Trou14, 'Choisissez un temps de marche pour le trou 14 ') }}
+    {{ form_widget(form.Trou14) }}
+    {{ form_label(form.Trou15, 'Choisissez un temps de marche pour le trou 15 ') }}
+    {{ form_widget(form.Trou15) }}
+    {{ form_label(form.Trou16, 'Choisissez un temps de marche pour le trou 16 ') }}
+    {{ form_widget(form.Trou16) }}
+    {{ form_label(form.Trou17, 'Choisissez un temps de marche pour le trou 17 ') }}
+    {{ form_widget(form.Trou17) }}
+    {{ form_label(form.Trou18, 'Choisissez un temps de marche pour le trou 18 ') }}
+    {{ form_widget(form.Trou18) }}
+    {{ form_end(form) }}
+{% endblock %}

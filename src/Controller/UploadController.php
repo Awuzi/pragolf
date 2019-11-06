@@ -27,8 +27,6 @@ class UploadController extends AbstractController
 
         $competition = new Competition();
 
-
-
         //creation du formulaire et liasion avec l'entité competition
         $form = $this->createForm(UploadFormType::class, $competition);
 
@@ -132,6 +130,8 @@ class UploadController extends AbstractController
 
                 $entitymanager->persist($trou);
                 $entitymanager->flush();
+
+            return $this->redirectToRoute("view");
         }
         return $this->render('upload/uploadTrou.html.twig', [
             'form' => $form->createView()
