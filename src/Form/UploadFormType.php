@@ -53,7 +53,7 @@ class UploadFormType extends AbstractType
                 'data' => 11 ,
                 'label' => 'Cadence de jeu entre les parties'])
             ->add('fichier', FileType::class)
-            ->add('save', SubmitType::class);
+            ->add('Generer cadence de jeu', SubmitType::class);
 
 
     }
