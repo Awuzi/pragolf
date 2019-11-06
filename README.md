@@ -1,3 +1,4 @@
+![](analyse/PRAGolf.png "PRAGolf")
 # **PROJET PRAGOLF**
 
 Gestion de cadences de jeu pour compétitons amateurs de la FFGolf. 
@@ -63,5 +64,8 @@ Si le tableau convient à l'arbitre, il est alors généré par l'application po
 être imprimé par l'arbitre.
 ![](analyse/valider.png "Validation par l'arbitre ou non")
 
+Une fois validé, un tableau PDF au format suivant est généré : 
+
+![](analyse/pdf.png "Exemple de fichier PDF généré")
 
 
