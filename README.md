@@ -41,4 +41,23 @@ Projet réalisé sous la Licence MIT
 *Diagramme de cas d'utilisation :*
 ![](analyse/UCDiag.png "Diagramme de cas d'utilisation")
 
+### **Utilisation de l'application**
+
+L'utilisateur doit en premier se connecter avec son nom d'utilisateur et son
+mot de passe. 
+![](analyse/login.png "Fenêtre de connexion")
+Une fois connecté l'arbitre peut ensuite se rendre sur le formulaire lui 
+permettant de renseigner le nom du golf sur lequel se déroule la compétition, de saisir
+le nom de la compétition, sa date, son heure de départ, de renseigner combien de temps
+doit être laissé entre chaque parties, et enfin d'ajouter le fichier Excel contenant
+la liste des joueurs fournies par la FFGolf.
+![](analyse/cadencejeu.png "Formulaire de demande de cadence de jeu")
+Après cela le tableau contenant les cadences de jeu est créé dans la page suivante
+avec pour possibilité pour l'arbitre de valider ou non si le tableau lui convient.
+![](analyse/Gen_tableau.png "Extrait du tableau généré par l'application")
+Si le tableau convient à l'arbitre, il est alors généré par l'application pour
+être imprimé par l'arbitre.
+![](analyse/valider.png "Validation par l'arbitre ou non")
+
+
 
