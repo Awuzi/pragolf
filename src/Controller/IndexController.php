@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Competition;
 use App\Services\ExcelExtract;
+use PhpOffice\PhpSpreadsheet\Exception;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Html2Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,6 +47,8 @@ class IndexController extends AbstractController
      * @Route("/view", name="view")
      * @param ExcelExtract $excelExtract
      * @return Response
+     * @throws Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      */
     public function view(ExcelExtract $excelExtract)
     {
@@ -53,7 +56,6 @@ class IndexController extends AbstractController
         $tempsTrous = $this->tempsTrous;
         $info_compet = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findOneBy([], ['id' => 'DESC']);
 
-        //$html = file_get_contents('../../templates/index/view.html.twig');
         return $this->render('index/view.html.twig', [
             'info_compet' => $info_compet,
             'parties' => $tableauJoueurs,
@@ -64,7 +66,9 @@ class IndexController extends AbstractController
     /**
      * @Route ("/pdf", name="pdf")
      * @param ExcelExtract $excelExtract
+     * @throws Exception
      * @throws Html2PdfException
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      */
     public function pdfGenerator(ExcelExtract $excelExtract)
     {

@@ -74,7 +74,6 @@ class AdminController extends AbstractController
      */
     public function removeGolf($id)
     {
-        $golf = new Golf();
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(Golf::class)->find($id);
         $em->remove($user);

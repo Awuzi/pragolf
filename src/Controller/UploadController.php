@@ -55,15 +55,12 @@ class UploadController extends AbstractController
                 ->setFichier($fichier)
                 ->setCadence($cadence);
 
-            //récuperation du fichier qui a été uploadé
             //stockage du futur nom du fichier que notre application connait
             $fichier->move($this->getParameter('upload_directory'), $filename);
 
             $entitymanager->persist($competition);
             $entitymanager->flush();
 
-            //redirection vers la vue "view"
-            $c = new IndexController();
             return $this->redirectToRoute("view");
         }
 
@@ -76,6 +73,7 @@ class UploadController extends AbstractController
      * @param Request $request
      * @Route("/uploadTrou", name="uploadTrou")
      * @return RedirectResponse|Response
+     * @deprecated
      */
     public function uploadTrou(Request $request){
         $entitymanager = $this->getDoctrine()->getManager();
