@@ -15,7 +15,7 @@ class AdminController extends AbstractController
      * @Route("/backoffice", name="backoffice")
      * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         return $this->render('backoffice/index.html.twig');
     }
@@ -25,7 +25,7 @@ class AdminController extends AbstractController
      * @Route("/backoffice/golf", name="backoffice_golf")
      * @return Response
      */
-    public function golfAdmin()
+    public function golfAdmin(): Response
     {
         $golfs = $this->getDoctrine()->getManager()->getRepository(Golf::class)->findAll();
 
@@ -39,7 +39,7 @@ class AdminController extends AbstractController
      * @Route("/backoffice/user", name="backoffice_user")
      * @return Response
      */
-    public function userAdmin()
+    public function userAdmin(): Response
     {
         $users = $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
 
@@ -53,7 +53,7 @@ class AdminController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function addGolf(Request $request)
+    public function addGolf(Request $request): Response
     {
         $golf = new Golf();
         $em = $this->getDoctrine()->getManager();
@@ -72,7 +72,7 @@ class AdminController extends AbstractController
      * @param $id
      * @return Response
      */
-    public function removeGolf($id)
+    public function removeGolf($id): Response
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(Golf::class)->find($id);

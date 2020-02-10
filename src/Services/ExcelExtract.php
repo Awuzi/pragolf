@@ -16,10 +16,10 @@ class ExcelExtract implements IReadFilter
      * @throws Exception
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      */
-    public static function ExceltoPhp($excelFile)
+    public function ExceltoPhp($excelFile): array
     {
         $reader = new Xlsx();
-        $reader->setReadFilter(new ExcelExtract()); //remplace ExcelExtract par le nom de ta classe
+        $reader->setReadFilter(new self()); //remplace ExcelExtract par le nom de ta classe
         $reader->setReadDataOnly(true);
 
         $spreadsheet = $reader->load($excelFile);
@@ -40,7 +40,8 @@ class ExcelExtract implements IReadFilter
             foreach ($joueur as $nom) {
                 $joueursGroup3[] = $nom;
 
-                if (($joueursRestant == 4 or $joueursRestant == 2) && (count($joueursGroup3) == 2)) {
+                /** @var array $joueursRestant */
+                if ((4 == $joueursRestant || 2 == $joueursRestant) && (count($joueursGroup3) == 2)) {
                     $parties[] = array($couleur, $joueursGroup3);
                     $joueursRestant -= 2;
                     unset($joueursGroup3);
@@ -58,9 +59,8 @@ class ExcelExtract implements IReadFilter
             }
         }
 
-
-
-        return self::phpToJson($parties); //return json tab
+        /** @var array $parties */
+        return $this->phpToJson($parties);
     }
 
 
@@ -68,19 +68,9 @@ class ExcelExtract implements IReadFilter
      * @param $file
      * @return array
      */
-    public static function phpToJson($file)
+    public function phpToJson($file): array
     {
-        /*$newFile = new Filesystem();
-        $path = "../public/assets/doc/partie.json";
-        $newFile->touch($path); //creation du fichier partie.json
-        //creation du fichier json et ecriture des infos
-        $filename = '../public/assets/doc/partie.json';
-        $newJsonFile = new File($filename);
-        $newJsonFile
-            ->openFile('w+')
-            ->fwrite(json_encode($file, JSON_UNESCAPED_UNICODE));*/
-        $f = json_encode($file);
-        return json_decode($f);
+        return json_decode(json_encode($file));
     }
 
     /**
@@ -89,8 +79,8 @@ class ExcelExtract implements IReadFilter
      * @param string $worksheetName
      * @return bool
      */
-    public function readCell($column, $row, $worksheetName = '')
+    public function readCell($column, $row, $worksheetName = ''): bool
     {
-        return ($row > 9 && $row < 175) ? true : false;
+        return ($row > 9 && $row < 175);
     }
 }

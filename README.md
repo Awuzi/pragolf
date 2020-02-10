@@ -1,7 +1,8 @@
-![](analyse/PRAGolf.png "PRAGolf")
 # **PROJET PRAGOLF**
 
-Gestion de cadences de jeu pour compétitons amateurs de la FFGolf. 
+Gestion de cadences de jeu pour compétitons amateurs de la FFGolf.
+ - Symfony 4.3
+ - PHP 7.3.1 
 
 ### **Auteurs**
 
@@ -9,13 +10,14 @@ Yahia Lamri - Stanislas Raczynski
 
 ### **Etat du projet**
 
-Work in Progress
+Completed
 
 ### **Description**
 
-Ce projet à pour but de générer un tableau comprenant les heures de départ
-ainsi que les cadences de jeu de toutes les parties d'une journée de compétition
-d'un tournoi de golf. 
+Ce projet à pour but de générer un tableau comprenant les heures de départ ainsi que les cadences de jeu de toutes les parties (équipes) d'une journée de compétition d'un tournoi de golf. 
+
+Le tableau est généré depuis un fichier excel fourni par la FFGolf
+
 Projet commandé par la FFGolf.
 
 ### **Mise en place, utilisation**
@@ -64,7 +66,7 @@ Si le tableau convient à l'arbitre, il est alors généré par l'application po
 être imprimé par l'arbitre.
 ![](analyse/valider.png "Validation par l'arbitre ou non")
 
-Une fois validé, un tableau PDF au format suivant est généré : 
+Une fois validé, un tableau PDF au format suivant est généré (ci-dessous une seule ligne y figure le tableau comprend une quarantaine de lignes) : 
 
 ![](analyse/pdf.png "Exemple de fichier PDF généré")
 

@@ -16,10 +16,13 @@ class AppFixtures extends Fixture
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function load(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     */
+    public function load(ObjectManager $manager): void
     {
         $user = new User();
-        $user->setUsername("yahia")->setRoles(["ROLE_ADMIN"])->setPassword($this->passwordEncoder->encodePassword($user, 'yahia'));
+        $user->setUsername('yahia')->setRoles(['ROLE_ADMIN'])->setPassword($this->passwordEncoder->encodePassword($user, 'yahia'));
 
         $manager->persist($user);
         $manager->flush();
