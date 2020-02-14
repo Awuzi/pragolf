@@ -1,4 +1,10 @@
-# **PROJET PRAGOLF**
+<h1 align="center">PROJET PRAGOLF</h1>
+
+<p align="center">
+ <img src="https://scrutinizer-ci.com/g/Awuzi/pragolf/badges/build.png?b=master" alt="Build Status" />
+ <img src="https://scrutinizer-ci.com/g/Awuzi/pragolf/badges/code-intelligence.svg?b=master" alt="Code Intelligence Status" />
+</p>
+
 
 Gestion de cadences de jeu pour compétitons amateurs de la FFGolf.
  - Symfony 4.3
