@@ -3,6 +3,8 @@
 <p align="center">
  <img src="https://scrutinizer-ci.com/g/Awuzi/pragolf/badges/build.png?b=master" alt="Build Status" />
  <img src="https://scrutinizer-ci.com/g/Awuzi/pragolf/badges/code-intelligence.svg?b=master" alt="Code Intelligence Status" />
+ <img src="https://img.shields.io/github/license/Awuzi/pragolf" alt="Licence" />
+
 </p>
 
 
