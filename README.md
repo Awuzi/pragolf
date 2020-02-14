@@ -14,6 +14,8 @@ Gestion de cadences de jeu pour compétitons amateurs de la FFGolf.
 
 ### **Auteurs**
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1417dd4b1f3640db88398a3d202958e2)](https://app.codacy.com/manual/Awuzi/pragolf?utm_source=github.com&utm_medium=referral&utm_content=Awuzi/pragolf&utm_campaign=Badge_Grade_Dashboard)
+
 Yahia Lamri - Stanislas Raczynski
 
 ### **Etat du projet**
