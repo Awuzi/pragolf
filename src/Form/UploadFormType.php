@@ -24,7 +24,7 @@ class UploadFormType extends AbstractType
             ->add("golf", EntityType::class, [
                 'class' => Golf::class,
                 'choice_label' => 'nom',
-                'query_builder' => function (EntityRepository $e){
+                'query_builder' => function(EntityRepository $e) {
                     return $e->createQueryBuilder('g')->orderBy('g.nom', 'ASC');
                 },
                 'choice_value' => 'nom',
@@ -33,7 +33,7 @@ class UploadFormType extends AbstractType
             ->add('nomCompet', TextType::class, [
                 'label' => 'Nom Competition'
             ])
-            ->add('date',TextType::class, [
+            ->add('date', TextType::class, [
                 'data' => date("d/m/Y"),
                 'label' => 'Date Compétition'
             ])
@@ -50,7 +50,7 @@ class UploadFormType extends AbstractType
                 ]
             ])
             ->add('cadence', IntegerType::class, [
-                'data' => 11 ,
+                'data' => 11,
                 'label' => 'Cadence de jeu entre les parties'])
             ->add('fichier', FileType::class)
             ->add('Generer cadence de jeu', SubmitType::class);
