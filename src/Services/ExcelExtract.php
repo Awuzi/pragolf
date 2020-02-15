@@ -25,6 +25,8 @@ class ExcelExtract implements IReadFilter
         $spreadsheet = $reader->load($excelFile);
         $workSheet = $spreadsheet->getActiveSheet();
 
+        $joueurs = [];
+        $parties = [];
         for ($i = 1; $i < 175; $i++) {
             $nom = $workSheet->getCell('B'.$i)->getValue();
             $couleur = $workSheet->getCell('I'.$i)->getValue();
@@ -32,7 +34,6 @@ class ExcelExtract implements IReadFilter
                 $joueurs[$couleur][] = $nom;
             }
         }
-
         foreach ($joueurs as $couleur => $joueur) { // Tri de joueurs; créations des parties
             $joueursRestant = count($joueur);
             unset($joueursGroup3);
