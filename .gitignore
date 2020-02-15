@@ -1,8 +1,6 @@
 
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
+/.env.test
+/public/assets/scss
 /public/bundles/
 /var/
 /node_modules/
@@ -13,8 +11,12 @@
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
+phpunit.xml.dist
+package-lock.json
+composer.json
+symfony.lock
 ###< symfony/phpunit-bridge ###
-
+phpunit.phar
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
